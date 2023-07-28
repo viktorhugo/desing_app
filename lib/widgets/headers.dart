@@ -254,7 +254,84 @@ class _HeaderWavesPainter extends CustomPainter {
     );
     path.quadraticBezierTo(
       size.width * 0.75, // size de la curva x
-      size.height * 0.26, // size de la curva y
+      size.height * 0.25, // size de la curva y
+      size.width , // toda la pantalla de ancha
+      size.height *0.30 // size de y
+    );
+
+    path.lineTo(size.width, 0);
+
+    //draw path
+    canvas.drawPath(path, pen);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return true;
+  }
+
+}
+
+class HeaderWavesGradient extends StatelessWidget {
+  const HeaderWavesGradient({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: double.infinity,
+      width: double.infinity,
+      color: const Color(0XffFFFFFF),
+      child: CustomPaint(
+        painter: _HeaderWavesGradientPainter(),
+      ),
+    );
+  }
+}
+
+class _HeaderWavesGradientPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    
+    const Gradient gradient = LinearGradient( // si agrega un nuevo color tambien agregar un stop
+      begin: Alignment.topCenter,
+      end: Alignment.bottomCenter,
+      colors: [
+        Color(0xff6D05E8),
+        Color(0xffC012FF),
+        Color(0xff6D05FA),
+      ],
+      // Valores porcentuales en los que los colores trabajen
+      stops: [
+        0.1,
+        0.5,
+        1.0
+      ]
+    );
+
+    final Rect rect = Rect.fromCircle(
+      center: Offset(0.0, 55.0), 
+      radius: 180
+    );
+
+    // pen
+    final pen = Paint()..shader = gradient.createShader(rect);
+    // pen.color =const Color(0Xff615AAB);
+    pen.style = PaintingStyle.fill; // .stroke .fill
+    pen.strokeWidth = 20;
+
+    final path = Path();
+
+    // draw with pen
+    path.lineTo(0, size.height *0.30);
+    path.quadraticBezierTo(
+      size.width * 0.25, // size de la curva x
+      size.height * 0.35, // size de la curva y
+      size.width *0.5, // toda la pantalla de ancha
+      size.height *0.30 // size de y
+    );
+    path.quadraticBezierTo(
+      size.width * 0.75, // size de la curva x
+      size.height * 0.25, // size de la curva y
       size.width , // toda la pantalla de ancha
       size.height *0.30 // size de y
     );
