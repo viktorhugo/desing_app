@@ -1,4 +1,6 @@
-import 'package:desing_app/pages/header_page.dart';
+import 'package:desing_app/challenges/cuadrado_animated_page.dart';
+// import 'package:desing_app/pages/animations_page.dart';
+// import 'package:desing_app/pages/header_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -18,7 +20,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const HeadersPage(),
+      home: const CuadradoAnimatedPage(),
     );
   }
 }
