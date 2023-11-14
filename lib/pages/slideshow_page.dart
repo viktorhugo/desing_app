@@ -57,8 +57,8 @@ class MySlideShow extends StatelessWidget {
       dotsPosition: DotPosition.down,
       bulletPrimaryColor: Colors.deepPurpleAccent[200],
       bulletSecondaryColor: Colors.black38,
-      bulletPrimarySize: 22.0,
-      bulletSecondarySize: 10.0,
+      bulletPrimarySize: 18.0,
+      bulletSecondarySize: 12.0,
     );
   }
 }
