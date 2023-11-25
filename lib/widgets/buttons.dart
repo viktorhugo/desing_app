@@ -3,31 +3,46 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ButtonLx extends StatelessWidget {
 
-  
+  final IconData icon;
+  final String text;
+  final Color color1;
+  final Color color2;
+  final VoidCallback onPress;
 
-  const ButtonLx({super.key});
+  const ButtonLx({
+    super.key, 
+    required this.icon, 
+    required this.text, 
+    required this.color1, 
+    required this.color2, 
+    required this.onPress
+  });
 
   @override
   Widget build(BuildContext context) {
     
-    return const Stack(
-      children: [
-        _ButtonLxBackground(
-          color1: Color(0xff6989f5),
-          color2: Color(0xff906EF5),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(height: 140,width: 40),
-            FaIcon(FontAwesomeIcons.carBurst, color: Colors.white, size: 40,),
-            SizedBox(width: 20),
-            Expanded(child: Text('Motor Accident', style: TextStyle(color: Colors.white, fontSize: 18),)),
-            FaIcon(FontAwesomeIcons.chevronRight, color: Colors.white, size: 40,),
-            SizedBox(width: 40),
-          ],
-        )
-      ],
+    return GestureDetector(
+      onTap: onPress,
+      child: Stack(
+        children: [
+          _ButtonLxBackground(
+            color1: color1,
+            color2:color2,
+            icon: icon,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const SizedBox(height: 140,width: 40),
+              FaIcon(icon, color: Colors.white, size: 40,),
+              const SizedBox(width: 20),
+              Expanded(child: Text(text, style: TextStyle(color: Colors.white, fontSize: 18),)),
+              const FaIcon(FontAwesomeIcons.chevronRight, color: Colors.white, size: 40,),
+              const SizedBox(width: 40),
+            ],
+          )
+        ],
+      ),
     );
   }
 }
@@ -36,17 +51,18 @@ class _ButtonLxBackground extends StatelessWidget {
 
   final Color color1;
   final Color color2;
+  final IconData icon;
   
   const _ButtonLxBackground({
     super.key, 
     required this.color1, 
     required this.color2,
+    required this.icon, 
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      
       width: double.infinity,
       height: 100,
       margin: const EdgeInsets.all(20),
@@ -71,16 +87,16 @@ class _ButtonLxBackground extends StatelessWidget {
       ),
       
       child: ClipRRect( // cortar los bordes si algo se sale
+        borderRadius: const BorderRadius.all(Radius.circular(15)), // cortar los bordes si algo se sale
         child: Stack(
           children: [
             Positioned(
               right: -20,
               top: -20,
-              child: FaIcon(FontAwesomeIcons.carBurst, size: 150, color: Colors.white.withOpacity(0.4),)
+              child: FaIcon(icon, size: 150, color: Colors.white.withOpacity(0.4),)
             )
           ],
         ),
-        borderRadius: const BorderRadius.all(Radius.circular(15)),
       ),
     );
   }
