@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 void main() {
   runApp(
     ChangeNotifierProvider(
-      create: (BuildContext context) => ThemeChanger(),
+      create: (BuildContext context) => ThemeChanger(theme: 2),
       child: const MyApp()
     )
   );
@@ -18,13 +18,18 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
+    final appTheme = Provider.of<ThemeChanger>(context).currentTheme;
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Designs',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      // theme: ThemeData(
+      //   colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+      //   useMaterial3: true,
+      // ),
+      // themeMode: ThemeMode.light,
+      theme: appTheme,
       home: const LauncherPage(),
     );
   }
