@@ -4,7 +4,11 @@ class ThemeChanger extends ChangeNotifier {
   
   bool _darkTheme  =  false;
   bool _customTheme  =  false;
-  ThemeData _currentTheme = ThemeData.light();
+  ThemeData _currentTheme = ThemeData(
+    useMaterial3: true,
+    // Define the default brightness and colors.
+    colorSchemeSeed: Colors.greenAccent,
+  );
 
   ThemeChanger({required int theme}) {
     switch (theme) {

@@ -1,7 +1,9 @@
 import 'package:desing_app/helpers/enums.dart';
+import 'package:desing_app/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:desing_app/widgets/slideshow.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 class SlideShowPage extends StatelessWidget {
   const SlideShowPage({super.key});
@@ -46,6 +48,11 @@ class MySlideShow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final darkTheme = Provider.of<ThemeChanger>(context).darkTheme;
+    final appTheme = Provider.of<ThemeChanger>(context);
+    final secondaryColor = appTheme.currentTheme.colorScheme.secondary;
+
     return SlideShow(
       slides: [
         SvgPicture.asset(svg1),
@@ -55,7 +62,7 @@ class MySlideShow extends StatelessWidget {
         SvgPicture.asset(svg5),
       ],
       dotsPosition: DotPosition.down,
-      bulletPrimaryColor: Colors.deepPurpleAccent[200],
+      bulletPrimaryColor: darkTheme ? secondaryColor: Colors.deepPurpleAccent[200],
       bulletSecondaryColor: Colors.black38,
       bulletPrimarySize: 18.0,
       bulletSecondarySize: 12.0,

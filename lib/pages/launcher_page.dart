@@ -14,36 +14,36 @@ class LauncherPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Designs flutter'),
-        backgroundColor: Colors.blue,
       ),
-      drawer: _MenuPrincipal(),
-      body: _ListOptions(),
+      drawer: const _MenuPrincipal(),
+      body: const _OptionList(),
     );
   }
 }
 
-class _ListOptions extends StatelessWidget {
+class _OptionList extends StatelessWidget {
   
-  const _ListOptions({ super.key });
+  const _OptionList({ super.key });
 
   @override
   Widget build(BuildContext context) {
 
     final routes = pageRoutes;
+    final appTheme = Provider.of<ThemeChanger>(context).currentTheme;
 
     return ListView.separated(
       physics: const BouncingScrollPhysics(),
       itemCount: routes.length,
       separatorBuilder: (BuildContext context, int index) {
-        return const Divider(
-          color: Colors.amber,
+        return Divider(
+          color: appTheme.primaryColorLight,
         );
       },
       itemBuilder: (BuildContext context, int index) {
         return ListTile(
-          leading: FaIcon(routes[index].icon, color: Colors.blue),
+          leading: FaIcon(routes[index].icon, color: appTheme.colorScheme.secondary),
           title: Text(routes[index].title),
-          trailing: const Icon(Icons.chevron_right, color: Colors.blue,),
+          trailing: Icon(Icons.chevron_right, color: appTheme.colorScheme.secondary,),
           onTap: () {
             Navigator.push(context, MaterialPageRoute(builder: (context) => routes[index].page));
           },
@@ -60,10 +60,11 @@ class _MenuPrincipal extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final ThemeChanger themeProvider = Provider.of<ThemeChanger>(context);
+    final secondaryColor = themeProvider.currentTheme.colorScheme.secondary;
 
     return Drawer(
-      surfaceTintColor: Colors.white,
-      shadowColor: Colors.white,
+      // surfaceTintColor: Colors.white,
+      // shadowColor: Colors.white,
       child: Column(
         children: [
 
@@ -72,21 +73,21 @@ class _MenuPrincipal extends StatelessWidget {
               // padding: const EdgeInsets.all(5),
               width: double.infinity,
               height: 150,
-              child: const CircleAvatar(
-                backgroundColor: Colors.blueAccent,
-                child: Text('VM', style:  TextStyle( fontSize: 50, color: Colors.white),),
+              child:  CircleAvatar(
+                backgroundColor: secondaryColor,
+                child: const Text('VM', style:  TextStyle( fontSize: 50, color: Colors.white),),
               ),
             ),
           ),
 
-          const Expanded(child: _ListOptions()),
+          const Expanded(child: _OptionList()),
 
           ListTile(
-            leading: const Icon(Icons.lightbulb_outline, color: Colors.blue,),
+            leading: Icon(Icons.lightbulb_outline, color: secondaryColor,),
             title: const Text('Dark Mode'),
             trailing: Switch.adaptive(
               value: themeProvider.darkTheme, 
-              activeColor: Colors.blue,
+              activeColor: secondaryColor,
               onChanged: (value) => themeProvider.darkTheme = value,
             ),
           ),
@@ -97,11 +98,11 @@ class _MenuPrincipal extends StatelessWidget {
             left: false,
             right: false,
             child: ListTile(
-              leading: const Icon(Icons.add_to_home_screen, color: Colors.blue,),
+              leading: Icon(Icons.add_to_home_screen, color: secondaryColor,),
               title: const Text('Custom Theme'),
               trailing: Switch.adaptive(
                 value: themeProvider.customTheme,
-                activeColor: Colors.blue,
+                activeColor: secondaryColor,
                 onChanged: (value) => themeProvider.customTheme = value,
               ),
             ),
