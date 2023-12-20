@@ -1,17 +1,19 @@
-import 'package:flutter/material.dart';
-
-import 'package:provider/provider.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 import 'package:desing_app/routes/routes.dart';
 import 'package:desing_app/theme/theme.dart';
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
 class LauncherPage extends StatelessWidget {
   const LauncherPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+
+    final ThemeChanger themeProvider = Provider.of<ThemeChanger>(context);
+
     return Scaffold(
+      backgroundColor: themeProvider.currentTheme.scaffoldBackgroundColor,
       appBar: AppBar(
         title: const Text('Designs flutter'),
       ),
@@ -69,7 +71,7 @@ class _MenuPrincipal extends StatelessWidget {
         children: [
 
           SafeArea(
-            child: Container(
+            child: SizedBox(
               // padding: const EdgeInsets.all(5),
               width: double.infinity,
               height: 150,

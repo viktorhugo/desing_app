@@ -59,7 +59,17 @@ class ThemeChanger extends ChangeNotifier {
     _darkTheme = false;
 
     if (value) {
-      _currentTheme = ThemeData.light();
+      _currentTheme = ThemeData.dark().copyWith(
+        primaryColor: const Color(0xff48A0EB),
+        // colorScheme: ColorScheme.fromSeed(seedColor: seedColor),
+        scaffoldBackgroundColor: const Color(0xff16202B),
+        textTheme: const TextTheme(
+          bodyLarge: TextStyle(
+            color: Colors.white
+          )
+        ),
+        primaryColorLight: Colors.white
+      );
     } else {
       _currentTheme = ThemeData.light();
     }

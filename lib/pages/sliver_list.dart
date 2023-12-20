@@ -1,4 +1,6 @@
+import 'package:desing_app/theme/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SliverPage extends StatelessWidget {
   const SliverPage({super.key});
@@ -25,13 +27,16 @@ class _FloatButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     final size = MediaQuery.of(context).size;
+    final appTheme = Provider.of<ThemeChanger>(context);
+
     return ButtonTheme(
       minWidth: size.width * 0.9,
       height: 100,
       child: MaterialButton(
-        color: const Color(0xffED6762),
-        shape: RoundedRectangleBorder(
+        color: appTheme.darkTheme ? appTheme.currentTheme.colorScheme.onSecondary : const Color(0xffED6762) ,
+        shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(topLeft: Radius.circular(50))
         ),
         onPressed: () {
@@ -68,6 +73,9 @@ class _MainWidgets extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final appTheme = Provider.of<ThemeChanger>(context).currentTheme;
+
     return CustomScrollView(
       slivers: [
         
@@ -85,7 +93,7 @@ class _MainWidgets extends StatelessWidget {
             maxHeight: 190,
             child: Container(
               alignment: Alignment.centerLeft,
-              color: Colors.white,
+              color: appTheme.scaffoldBackgroundColor,
               child: const _Header(),
             )
           )
@@ -172,12 +180,22 @@ class _Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final appTheme = Provider.of<ThemeChanger>(context);
+
     return Column(
       children: [
         const SizedBox(height: 30),
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-          child: const Text('New', style: TextStyle( color: Color(0xff532128), fontSize: 50 ),),
+          child: Text(
+            'New', 
+            style: 
+            TextStyle( 
+              color: appTheme.darkTheme ? Colors.grey :const Color(0xff532128), 
+              fontSize: 50 
+            ),
+          ),
         ),
 
         Stack(
@@ -193,8 +211,8 @@ class _Header extends StatelessWidget {
               child: Container(
                 width: 90,
                 height: 5,
-                decoration: const BoxDecoration(
-                  color: Color(0xffD93A30)
+                decoration: BoxDecoration(
+                  color: appTheme.darkTheme ? Colors.grey :const Color(0xffD93A30)
                 ),
               ),
             ),
@@ -218,16 +236,26 @@ class _ListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final appTheme = Provider.of<ThemeChanger>(context);
+
     return Container(
       padding: const EdgeInsets.only(left: 20),
       alignment: Alignment.centerLeft,
       height: 130,
       margin: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: color,
+        color: appTheme.darkTheme ? Colors.grey :  color,
         borderRadius: BorderRadius.circular(25)
       ),
-      child: Text(title, style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold,),),
+      child: Text(
+        title, 
+        style: const TextStyle(
+          color: Colors.white , 
+          fontSize: 20, 
+          fontWeight: FontWeight.bold
+        )
+      ),
     );
   }
 }

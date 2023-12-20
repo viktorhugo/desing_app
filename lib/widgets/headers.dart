@@ -274,7 +274,12 @@ class _HeaderWavesPainter extends CustomPainter {
 }
 
 class HeaderWavesGradient extends StatelessWidget {
-  const HeaderWavesGradient({super.key});
+  
+  final Color color;
+  const HeaderWavesGradient({
+    super.key, 
+    required this.color
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -283,13 +288,20 @@ class HeaderWavesGradient extends StatelessWidget {
       width: double.infinity,
       color: const Color(0XffFFFFFF),
       child: CustomPaint(
-        painter: _HeaderWavesGradientPainter(),
+        painter: _HeaderWavesGradientPainter(color: color),
       ),
     );
   }
 }
 
 class _HeaderWavesGradientPainter extends CustomPainter {
+
+  final Color color;
+  const _HeaderWavesGradientPainter({
+    required this.color
+  });
+
+
   @override
   void paint(Canvas canvas, Size size) {
     
@@ -310,7 +322,7 @@ class _HeaderWavesGradientPainter extends CustomPainter {
     );
 
     final Rect rect = Rect.fromCircle(
-      center: Offset(0.0, 55.0), 
+      center: const Offset(0.0, 55.0), 
       radius: 180
     );
 
